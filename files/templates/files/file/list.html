@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Uploaded Files</h1>
+
+<hr>
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Welcome</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Files</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <div class="card-body">
+
+
+<div class="table-responsive">
+  <table class="table table-hover table-sm">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Original Name</th>
+        <th>Extension</th>
+        <th>Mime</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+
+      {% for file in files %}
+
+      <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ file.original_filename }}</td>
+        <td>{{ file.file_extension }}</td>
+        <td>{{ file.mime_type }}</td>
+        <td>{{ file.description }}</td>
+        <td>
+          <div class="d-inline-flex gap-3 flex-wrap">
+            <a href="{{ file.file.url }}" class="btn btn-sm btn-outline-primary rounded-pill" download>Download</a>
+          </div>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">No file has been uploaded yet</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
+{% endblock %}

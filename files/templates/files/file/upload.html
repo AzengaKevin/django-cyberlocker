@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<h1>Upload New File</h1>
+<hr>
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Welcome</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'files:file_list' %}">Files</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Upload</li>
+    </ol>
+  </nav>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+{% endblock %}
